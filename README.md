@@ -34,3 +34,8 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+https://dev.to/chukwutosin_/step-by-step-guide-setting-up-a-nestjs-application-with-docker-and-postgresql-5hei
+https://thanhpolimi.com/docker-compose-for-nestjs-project-5ee7644e8aa2
+https://www.tomray.dev/nestjs-docker-compose-postgres
+https://medium.com/@asadbukhari886/a-comprehensive-walkthrough-establishing-a-nestjs-application-with-docker-and-postgresql-72bd8c36cab2
+https://blog.stackademic.com/using-docker-compose-to-run-nestjs-applications-with-redis-and-postgres-586ab132b60c
