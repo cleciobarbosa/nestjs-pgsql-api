@@ -1,8 +1,30 @@
+
 POST http://localhost:3000/users HTTP/1.1
 content-type: application/json
 
 {
+    "email": "",
+    "name": "clecio barbosa",
+    "password": "202020",
+    "passwordConfirmation": "202020"
+}
+
+### Login
+@baseUrl = "http://localhost:3000"
+POST http://localhost:3000/auth/login HTTP/1.1
+content-type: application/json
+
+{
     "email": "clecio.sb@gmail.com",
+    "password": "202020"
+}
+
+### SignUp
+POST http://localhost:3000/auth/signup HTTP/1.1
+content-type: application/json
+
+{
+    "email": "juca.sb@gmail.com",
     "name": "clecio barbosa",
     "password": "202020",
     "passwordConfirmation": "202020"

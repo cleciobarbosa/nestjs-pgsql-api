@@ -1,0 +1,17 @@
+   @baseUrl = "http://localhost:3000/"
+    # Login
+    # @name tokenAPI
+    POST {{baseUrl}}/Auth/login HTTP/1.1
+    Content-Type: application/json
+    
+    {
+        "Username": "myuser",
+        "Password": "mypassword"
+    }
+    ###
+    
+    @authToken = {{tokenAPI.response.body.token}}
+    # Get User
+    # @name getUser
+    GET {{baseUrl}}/me
+    Authorization: Bearer {{authToken}}
