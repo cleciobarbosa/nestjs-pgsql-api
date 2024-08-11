@@ -11,6 +11,7 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common';
 import { CredentialsDto } from './dto/credentials.dto';
+import { UpdateUserDto } from './dto/update-users.dto';
 
 @Injectable()
 export class UsersService {
@@ -63,7 +64,7 @@ export class UsersService {
   }
   async checkCredentials(credentialsDto: CredentialsDto): Promise<User> {
     const { email, password } = credentialsDto;
-    const user = await this.userRepository.findOne({where:{ email, status: true }});
+    const user = await this.userRepository.findOne({ where: { email, status: true } });
 
     if (user && (await user.checkPassword(password))) {
       return user;
@@ -73,5 +74,26 @@ export class UsersService {
   }
   private async hashPassword(password: string, salt: string): Promise<string> {
     return bcrypt.hash(password, salt);
+  }
+  async updateUser(updateuserDto: UpdateUserDto, id: string): Promise<User> {
+    const user = await this.userRepository.findOne({ where: { id: id } });
+    const { name, email, role, status } = updateuserDto;
+    user.name = name ? name : user.name;
+    user.email = email ? email : user.email;
+    user.role = role ? role : user.role;
+    user.status = status ? status : user.status;
+    try {
+      return await user.save();
+
+    } catch (error) {
+      throw new InternalServerErrorException('Erro ao salvar o usuário no banco de dados');
+    }
+  }
+
+  async deleteUser(id: string){
+    const result = await this.userRepository.delete(id);
+    if (result.affected === 0) {
+      throw new InternalServerErrorException('Erro ao deletar o usuário no banco de dados');
+    }
   }
 }
